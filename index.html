@@ -3,797 +3,122 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>恋爱人格测试 💕</title>
-<meta name="description" content="测测你的恋爱人格是什么？来发现你在爱情中的真实模样">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=Noto+Sans+SC:wght@300;400;500;700&display=swap" rel="stylesheet">
+<title>恋爱人格测试</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=ZCOOL+XiaoWei&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #FDF8F4;
-    --card: #FFFFFF;
-    --primary: #E8A0BF;
-    --primary-dark: #D4789B;
-    --accent: #BA90C6;
-    --soft-blue: #C0DBEA;
-    --text: #4A3728;
-    --text-light: #8B7355;
-    --text-muted: #B8A490;
-    --border: #F0E6DC;
-    --shadow: rgba(178, 128, 100, 0.08);
-    --radius: 20px;
-  }
-
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-
-  body {
-    font-family: 'Noto Sans SC', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    overflow-x: hidden;
-  }
-
-  /* 背景装饰 */
-  body::before {
-    content: '';
-    position: fixed;
-    top: -30%;
-    right: -20%;
-    width: 500px;
-    height: 500px;
-    background: radial-gradient(circle, rgba(232,160,191,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  body::after {
-    content: '';
-    position: fixed;
-    bottom: -20%;
-    left: -15%;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(192,219,234,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-    pointer-events: none;
-    z-index: 0;
-  }
-
-  .container {
-    max-width: 460px;
-    margin: 0 auto;
-    padding: 24px 20px 40px;
-    position: relative;
-    z-index: 1;
-  }
-
-  /* ===== 开始页面 ===== */
-  .page { display: none; }
-  .page.active { display: block; animation: fadeUp 0.5s ease; }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .start-page {
-    text-align: center;
-    padding-top: 60px;
-  }
-
-  .start-icon {
-    font-size: 64px;
-    margin-bottom: 24px;
-    display: inline-block;
-    animation: float 3s ease-in-out infinite;
-  }
-
-  @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
-  }
-
-  .start-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 32px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 12px;
-    letter-spacing: 2px;
-  }
-
-  .start-subtitle {
-    font-size: 15px;
-    color: var(--text-light);
-    line-height: 1.8;
-    margin-bottom: 40px;
-    font-weight: 300;
-  }
-
-  .start-meta {
-    display: flex;
-    justify-content: center;
-    gap: 24px;
-    margin-bottom: 48px;
-    font-size: 13px;
-    color: var(--text-muted);
-  }
-
-  .start-meta span {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .btn-start {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    color: white;
-    border: none;
-    padding: 16px 64px;
-    border-radius: 50px;
-    font-size: 17px;
-    font-weight: 500;
-    cursor: pointer;
-    letter-spacing: 2px;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 24px rgba(232,160,191,0.3);
-    font-family: 'Noto Sans SC', sans-serif;
-  }
-
-  .btn-start:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(232,160,191,0.4);
-  }
-
-  .btn-start:active {
-    transform: translateY(0);
-  }
-
-  /* ===== 测试页面 ===== */
-  .progress-bar {
-    width: 100%;
-    height: 4px;
-    background: var(--border);
-    border-radius: 4px;
-    margin-bottom: 32px;
-    overflow: hidden;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    border-radius: 4px;
-    transition: width 0.4s ease;
-  }
-
-  .question-counter {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-    font-weight: 300;
-  }
-
-  .question-text {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 22px;
-    font-weight: 600;
-    line-height: 1.6;
-    margin-bottom: 36px;
-    color: var(--text);
-  }
-
-  .options {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-  }
-
-  .option-btn {
-    background: var(--card);
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 18px 22px;
-    text-align: left;
-    font-size: 15px;
-    line-height: 1.6;
-    cursor: pointer;
-    transition: all 0.25s ease;
-    font-family: 'Noto Sans SC', sans-serif;
-    color: var(--text);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .option-btn::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: var(--primary);
-    opacity: 0;
-    transition: opacity 0.25s ease;
-  }
-
-  .option-btn:hover {
-    border-color: var(--primary);
-    background: #FFF9FB;
-    transform: translateX(4px);
-  }
-
-  .option-btn:hover::before {
-    opacity: 1;
-  }
-
-  .option-btn:active {
-    transform: translateX(4px) scale(0.99);
-  }
-
-  .option-btn.selected {
-    border-color: var(--primary);
-    background: linear-gradient(135deg, #FFF5F8, #FDF0F7);
-    box-shadow: 0 4px 16px rgba(232,160,191,0.15);
-  }
-
-  /* ===== 结果页面 ===== */
-  .result-page { text-align: center; padding-top: 20px; }
-
-  .result-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    padding: 40px 28px;
-    box-shadow: 0 8px 40px var(--shadow);
-    margin-bottom: 24px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .result-card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 4px;
-    background: linear-gradient(90deg, var(--primary), var(--accent), var(--soft-blue));
-  }
-
-  .result-type-icon {
-    font-size: 56px;
-    margin-bottom: 16px;
-    display: inline-block;
-  }
-
-  .result-type-label {
-    font-size: 13px;
-    color: var(--primary-dark);
-    font-weight: 500;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .result-type-name {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text);
-    margin-bottom: 6px;
-  }
-
-  .result-type-en {
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 24px;
-    font-weight: 300;
-    letter-spacing: 1px;
-  }
-
-  .result-desc {
-    font-size: 15px;
-    line-height: 1.9;
-    color: var(--text-light);
-    text-align: left;
-    margin-bottom: 28px;
-    font-weight: 300;
-  }
-
-  .result-tags {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 28px;
-  }
-
-  .result-tag {
-    background: #FFF5F8;
-    color: var(--primary-dark);
-    padding: 6px 16px;
-    border-radius: 50px;
-    font-size: 13px;
-    font-weight: 400;
-  }
-
-  .result-dimensions {
-    text-align: left;
-    margin-bottom: 8px;
-  }
-
-  .dimension {
-    margin-bottom: 16px;
-  }
-
-  .dimension-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    margin-bottom: 6px;
-  }
-
-  .dimension-label { color: var(--text-light); }
-  .dimension-value { color: var(--primary-dark); font-weight: 500; }
-
-  .dimension-bar {
-    width: 100%;
-    height: 6px;
-    background: var(--border);
-    border-radius: 6px;
-    overflow: hidden;
-  }
-
-  .dimension-fill {
-    height: 100%;
-    border-radius: 6px;
-    background: linear-gradient(90deg, var(--primary), var(--accent));
-    transition: width 1s ease;
-  }
-
-  .result-match {
-    background: #FAFBFF;
-    border-radius: 14px;
-    padding: 20px;
-    margin-top: 24px;
-    text-align: left;
-  }
-
-  .result-match h4 {
-    font-size: 14px;
-    color: var(--text);
-    margin-bottom: 8px;
-    font-weight: 500;
-  }
-
-  .result-match p {
-    font-size: 13px;
-    color: var(--text-light);
-    line-height: 1.7;
-    font-weight: 300;
-  }
-
-  .btn-group {
-    display: flex;
-    gap: 12px;
-    margin-top: 8px;
-  }
-
-  .btn-retry {
-    flex: 1;
-    padding: 14px;
-    border-radius: 50px;
-    border: 1.5px solid var(--border);
-    background: var(--card);
-    color: var(--text-light);
-    font-size: 15px;
-    cursor: pointer;
-    font-family: 'Noto Sans SC', sans-serif;
-    transition: all 0.3s;
-  }
-
-  .btn-retry:hover {
-    border-color: var(--primary);
-    color: var(--primary-dark);
-  }
-
-  .btn-share {
-    flex: 1;
-    padding: 14px;
-    border-radius: 50px;
-    border: none;
-    background: linear-gradient(135deg, var(--primary), var(--accent));
-    color: white;
-    font-size: 15px;
-    cursor: pointer;
-    font-family: 'Noto Sans SC', sans-serif;
-    transition: all 0.3s;
-    box-shadow: 0 4px 16px rgba(232,160,191,0.25);
-  }
-
-  .btn-share:hover {
-    box-shadow: 0 6px 20px rgba(232,160,191,0.35);
-  }
-
-  .footer-note {
-    text-align: center;
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 24px;
-    font-weight: 300;
-  }
-
-  /* 截图用的隐藏结果卡 */
-  .screenshot-hint {
-    font-size: 12px;
-    color: var(--text-muted);
-    margin-top: 16px;
-  }
+:root{--bg:#FFFAF6;--card:#FFF;--pri:#F2889B;--pri-l:#FFD4DC;--pri-d:#D4607A;--acc:#C490D1;--warm:#FFECD2;--blue:#B8D8E8;--mint:#C5E8D5;--txt:#3D2C2E;--txt-l:#7A6062;--txt-m:#B89A9C;--bdr:#F5E6E8;--r:14px}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--txt);min-height:100vh;overflow-x:hidden}
+.orb{position:fixed;border-radius:50%;pointer-events:none;z-index:0;filter:blur(60px)}
+.o1{top:-10%;right:-5%;width:400px;height:400px;background:rgba(242,136,155,.1)}
+.o2{bottom:-10%;left:-8%;width:350px;height:350px;background:rgba(196,144,209,.08)}
+.wrap{max-width:480px;margin:0 auto;padding:20px 18px 48px;position:relative;z-index:1}
+.pg{display:none}.pg.on{display:block;animation:fi .5s ease}
+@keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.shake{animation:shake .35s ease}
+.lk{text-align:center;padding-top:90px}
+.lk-e{font-size:52px;margin-bottom:20px;display:inline-block;animation:bob 2.5s ease-in-out infinite}
+.lk-t{font-family:'ZCOOL XiaoWei',serif;font-size:28px;margin-bottom:8px;letter-spacing:3px}
+.lk-s{font-size:14px;color:var(--txt-m);margin-bottom:32px;font-weight:300;line-height:1.7}
+.lk-f{max-width:260px;margin:0 auto 12px}
+.lk-i{width:100%;padding:14px 20px;border:2px solid var(--bdr);border-radius:50px;font-size:16px;text-align:center;background:var(--card);color:var(--txt);font-family:inherit;outline:none;transition:border .3s;letter-spacing:3px}
+.lk-i:focus{border-color:var(--pri)}.lk-i::placeholder{color:var(--txt-m);letter-spacing:1px;font-size:13px}
+.lk-err{font-size:12px;color:#E57373;height:18px;margin-bottom:16px;opacity:0;transition:opacity .3s}.lk-err.on{opacity:1}
+.btn{background:linear-gradient(135deg,var(--pri),var(--acc));color:#fff;border:none;padding:14px 56px;border-radius:50px;font-size:15px;font-weight:500;cursor:pointer;letter-spacing:2px;font-family:inherit;box-shadow:0 6px 20px rgba(242,136,155,.3);transition:all .3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(242,136,155,.35)}.btn:active{transform:translateY(0)}
+.st{text-align:center;padding-top:50px}
+.st-badge{display:inline-block;background:var(--pri-l);color:var(--pri-d);font-size:12px;font-weight:500;padding:5px 16px;border-radius:50px;margin-bottom:20px}
+.st-e{font-size:72px;margin-bottom:16px;display:inline-block;animation:bob 3s ease-in-out infinite}
+.st-t{font-family:'ZCOOL XiaoWei',serif;font-size:34px;margin-bottom:10px;letter-spacing:4px}
+.st-sub{font-size:15px;color:var(--txt-l);line-height:1.8;margin-bottom:32px;font-weight:300}
+.st-nums{display:flex;justify-content:center;gap:28px;margin-bottom:40px}
+.st-n{text-align:center}.st-n b{font-family:'ZCOOL XiaoWei',serif;font-size:26px;color:var(--pri-d);display:block}.st-n span{font-size:12px;color:var(--txt-m);font-weight:300}
+.btn-go{padding:16px 72px;font-size:17px;letter-spacing:3px;position:relative;overflow:hidden}
+.btn-go::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
+.btn-go:hover::after{left:100%}
+.th{margin-bottom:28px}
+.pt{width:100%;height:5px;background:var(--bdr);border-radius:5px;overflow:hidden;margin-bottom:12px}
+.pb{height:100%;background:linear-gradient(90deg,var(--pri),var(--acc));border-radius:5px;transition:width .4s;min-width:2%}
+.tm{display:flex;justify-content:space-between;align-items:center}
+.qn{font-size:13px;color:var(--txt-m);font-weight:300}
+.qt{font-size:12px;color:var(--txt-m);background:var(--warm);padding:3px 10px;border-radius:50px}
+.qq{font-family:'Noto Serif SC',serif;font-size:21px;font-weight:600;line-height:1.65;margin-bottom:28px}
+.os{display:flex;flex-direction:column;gap:12px}
+.oo{background:var(--card);border:1.5px solid var(--bdr);border-radius:var(--r);padding:16px 20px;text-align:left;font-size:15px;line-height:1.6;cursor:pointer;transition:all .2s;font-family:inherit;color:var(--txt);position:relative;overflow:hidden}
+.oo::before{content:'';position:absolute;left:0;top:0;width:3px;height:100%;background:var(--pri);opacity:0;transition:opacity .2s}
+.oo:hover{border-color:var(--pri);background:#FFF8F9;transform:translateX(4px)}.oo:hover::before{opacity:1}
+.oo:active{transform:translateX(4px) scale(.99)}
+.oo.pk{border-color:var(--pri);background:linear-gradient(135deg,#FFF5F7,#FEF0F4);box-shadow:0 2px 8px rgba(61,44,46,.06)}
+.rp{padding-top:12px}
+.rc{background:var(--card);border-radius:28px;padding:36px 24px;box-shadow:0 16px 48px rgba(61,44,46,.1);margin-bottom:20px;position:relative;overflow:hidden;text-align:center}
+.rc::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,var(--pri),var(--acc),var(--blue),var(--mint))}
+.re{font-size:60px;margin-bottom:12px;display:inline-block}
+.rb{display:inline-block;background:var(--pri-l);color:var(--pri-d);font-size:11px;font-weight:600;padding:4px 14px;border-radius:50px;margin-bottom:10px;letter-spacing:3px}
+.rn{font-family:'ZCOOL XiaoWei',serif;font-size:30px;margin-bottom:4px;letter-spacing:2px}
+.rn2{font-size:12px;color:var(--txt-m);margin-bottom:20px;font-weight:300;letter-spacing:1px}
+.rd{font-size:14px;line-height:1.9;color:var(--txt-l);text-align:left;margin-bottom:24px;font-weight:300}
+.rtg{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:24px}
+.rtg span{background:#FFF5F7;color:var(--pri-d);padding:5px 14px;border-radius:50px;font-size:12px}
+.dims{text-align:left;margin-bottom:20px}.dim{margin-bottom:14px}
+.dh{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
+.dl{color:var(--txt-l)}.dv{color:var(--pri-d);font-weight:600}
+.dt{width:100%;height:7px;background:var(--bdr);border-radius:7px;overflow:hidden}
+.df{height:100%;border-radius:7px;transition:width 1s}
+.f-pa{background:linear-gradient(90deg,#F2889B,#E8789E)}.f-se{background:linear-gradient(90deg,#B8D8E8,#8DBDD4)}.f-fr{background:linear-gradient(90deg,#C5E8D5,#7CC49A)}.f-de{background:linear-gradient(90deg,#C490D1,#B07AC0)}.f-ro{background:linear-gradient(90deg,#FFB7B2,#E8789E)}
+.rm{background:linear-gradient(135deg,#FAFBFF,#F8F0FF);border-radius:var(--r);padding:18px;margin-top:20px;text-align:left}
+.rm h4{font-size:14px;margin-bottom:6px;font-weight:600}.rm p{font-size:13px;color:var(--txt-l);line-height:1.7;font-weight:300}
+.rw{background:linear-gradient(135deg,#FFF8F0,#FFF0F0);border-radius:var(--r);padding:18px;margin-top:12px;text-align:left}
+.rw h4{font-size:14px;margin-bottom:6px;font-weight:600}.rw p{font-size:13px;color:var(--txt-l);line-height:1.7;font-weight:300}
+.br{display:flex;gap:12px;margin-top:8px}
+.ba{flex:1;padding:13px;border-radius:50px;border:1.5px solid var(--bdr);background:var(--card);color:var(--txt-l);font-size:14px;cursor:pointer;font-family:inherit;transition:all .3s}.ba:hover{border-color:var(--pri);color:var(--pri-d)}
+.bs{flex:1;padding:13px;border-radius:50px;border:none;background:linear-gradient(135deg,var(--pri),var(--acc));color:#fff;font-size:14px;cursor:pointer;font-family:inherit;transition:all .3s;box-shadow:0 4px 16px rgba(242,136,155,.25)}.bs:hover{box-shadow:0 6px 24px rgba(242,136,155,.35)}
+.ft{text-align:center;font-size:11px;color:var(--txt-m);margin-top:20px;font-weight:300}
 </style>
 </head>
 <body>
-
-<div class="container">
-  <!-- ===== 开始页 ===== -->
-  <div id="startPage" class="page start-page active">
-    <div class="start-icon">🌷</div>
-    <h1 class="start-title">恋爱人格测试</h1>
-    <p class="start-subtitle">
-      12道情境题，发现你在爱情中的真实模样<br>
-      找到属于你的恋爱人格
-    </p>
-    <div class="start-meta">
-      <span>📝 12道题</span>
-      <span>⏱ 约3分钟</span>
-      <span>💕 6种人格</span>
-    </div>
-    <button class="btn-start" onclick="startTest()">开始测试</button>
-  </div>
-
-  <!-- ===== 测试页 ===== -->
-  <div id="testPage" class="page">
-    <div class="progress-bar">
-      <div class="progress-fill" id="progressFill"></div>
-    </div>
-    <div class="question-counter" id="questionCounter"></div>
-    <div class="question-text" id="questionText"></div>
-    <div class="options" id="optionsContainer"></div>
-  </div>
-
-  <!-- ===== 结果页 ===== -->
-  <div id="resultPage" class="page result-page">
-    <div class="result-card" id="resultCard">
-      <div class="result-type-icon" id="resultIcon"></div>
-      <div class="result-type-label">你的恋爱人格</div>
-      <div class="result-type-name" id="resultName"></div>
-      <div class="result-type-en" id="resultEn"></div>
-      <div class="result-desc" id="resultDesc"></div>
-      <div class="result-tags" id="resultTags"></div>
-      <div class="result-dimensions" id="resultDimensions"></div>
-      <div class="result-match" id="resultMatch">
-        <h4 id="matchTitle"></h4>
-        <p id="matchDesc"></p>
-      </div>
-    </div>
-    <div class="btn-group">
-      <button class="btn-retry" onclick="retry()">重新测试</button>
-      <button class="btn-share" onclick="shareResult()">分享结果</button>
-    </div>
-    <p class="footer-note">长按截图分享给好友一起测试吧 🌸</p>
-  </div>
+<div class="orb o1"></div><div class="orb o2"></div>
+<div class="wrap">
+<div id="p0" class="pg lk on"><div class="lk-e">🔐</div><h1 class="lk-t">恋爱人格测试</h1><p class="lk-s">本测试为付费内容<br>请输入购买后获得的专属密码</p><div class="lk-f"><input type="text" class="lk-i" id="pw" placeholder="请输入密码" autocomplete="off" maxlength="20"></div><div class="lk-err" id="pe">密码不正确，请重新输入</div><button class="btn" onclick="unlock()">解锁测试</button></div>
+<div id="p1" class="pg st"><div class="st-badge">🧪 恋爱心理测试</div><div class="st-e">💘</div><h1 class="st-t">恋爱人格诊断</h1><p class="st-sub">18道恋爱情境题<br>发现你在爱情中的真实人格</p><div class="st-nums"><div class="st-n"><b>18</b><span>道情境题</span></div><div class="st-n"><b>10</b><span>种人格</span></div><div class="st-n"><b>5</b><span>大维度</span></div></div><button class="btn btn-go" onclick="begin()">开始测试</button></div>
+<div id="p2" class="pg"><div class="th"><div class="pt"><div class="pb" id="bar"></div></div><div class="tm"><span class="qn" id="qn"></span><span class="qt" id="qtt"></span></div></div><div class="qq" id="qq"></div><div class="os" id="os"></div></div>
+<div id="p3" class="pg rp"><div class="rc"><div class="re" id="Ie"></div><div class="rb">你的恋爱人格</div><div class="rn" id="In"></div><div class="rn2" id="Ien"></div><div class="rd" id="Id"></div><div class="rtg" id="It"></div><div class="dims" id="Idm"></div><div class="rm"><h4 id="Imt"></h4><p id="Imd"></p></div><div class="rw"><h4 id="Iwt"></h4><p id="Iwd"></p></div></div><div class="br"><button class="ba" onclick="again()">重新测试</button><button class="bs" id="sbtn" onclick="shr()">分享结果</button></div><p class="ft">长按截图分享给好友一起测试吧 🌸</p></div>
 </div>
-
 <script>
-// ===== 题目数据 =====
-const questions = [
-  {
-    q: "周末午后，恋人突然打来电话说「现在就想见你」，你的反应是？",
-    options: [
-      { text: "马上出门！能见面就是最好的事", scores: { passion: 3, security: 0, freedom: 0, devotion: 2 } },
-      { text: "开心答应，但会先安排好自己的事再出发", scores: { passion: 1, security: 1, freedom: 2, devotion: 1 } },
-      { text: "虽然意外，但觉得这种惊喜好浪漫", scores: { passion: 2, security: 0, freedom: 1, devotion: 2 } },
-      { text: "会有点犹豫，毕竟已经有自己的安排了", scores: { passion: 0, security: 1, freedom: 3, devotion: 0 } }
-    ]
-  },
-  {
-    q: "和恋人吵架后，你通常会怎么做？",
-    options: [
-      { text: "主动道歉，不想让冷战持续哪怕一秒", scores: { passion: 2, security: 1, devotion: 3, freedom: 0 } },
-      { text: "先冷静一下，想清楚再好好沟通", scores: { passion: 0, security: 3, freedom: 2, devotion: 1 } },
-      { text: "写一段长长的文字表达自己的感受", scores: { passion: 2, security: 1, freedom: 1, devotion: 2 } },
-      { text: "等对方来找自己，觉得谁先低头谁就输了", scores: { passion: 1, security: 0, freedom: 3, devotion: 0 } }
-    ]
-  },
-  {
-    q: "你理想中的约会方式是？",
-    options: [
-      { text: "精心策划的烛光晚餐或浪漫惊喜", scores: { passion: 3, security: 0, devotion: 2, freedom: 0 } },
-      { text: "在家一起做饭、看电影，安安静静待着", scores: { passion: 0, security: 3, devotion: 2, freedom: 1 } },
-      { text: "一起去没去过的地方探险、旅行", scores: { passion: 2, security: 0, freedom: 3, devotion: 1 } },
-      { text: "各自做喜欢的事，偶尔抬头相视一笑", scores: { passion: 0, security: 2, freedom: 3, devotion: 0 } }
-    ]
-  },
-  {
-    q: "发现恋人和异性朋友单独吃饭，你的第一反应是？",
-    options: [
-      { text: "内心翻涌，会直接问清楚怎么回事", scores: { passion: 3, security: 0, devotion: 2, freedom: 0 } },
-      { text: "虽然在意，但会先观察再决定要不要问", scores: { passion: 1, security: 2, freedom: 1, devotion: 1 } },
-      { text: "完全不介意，相信对方也相信这段关系", scores: { passion: 0, security: 2, freedom: 3, devotion: 1 } },
-      { text: "有点不安，希望对方能主动跟自己说", scores: { passion: 1, security: 1, devotion: 3, freedom: 0 } }
-    ]
-  },
-  {
-    q: "如果可以送恋人一份特别的礼物，你会选？",
-    options: [
-      { text: "亲手写的信或做的手工，独一无二", scores: { passion: 2, security: 0, devotion: 3, freedom: 1 } },
-      { text: "对方提过想要但舍不得买的东西", scores: { passion: 1, security: 2, devotion: 2, freedom: 0 } },
-      { text: "两个人的旅行，去创造新的回忆", scores: { passion: 2, security: 0, freedom: 3, devotion: 1 } },
-      { text: "一个浪漫的惊喜派对，让对方感动到哭", scores: { passion: 3, security: 0, devotion: 2, freedom: 0 } }
-    ]
-  },
-  {
-    q: "恋人说「我觉得我们需要一些各自的空间」，你会？",
-    options: [
-      { text: "心里有点慌，担心是不是感情出了问题", scores: { passion: 2, security: 0, devotion: 3, freedom: 0 } },
-      { text: "理解并尊重，觉得这是健康关系的一部分", scores: { passion: 0, security: 2, freedom: 3, devotion: 0 } },
-      { text: "同意，但希望能约定好联络的频率", scores: { passion: 0, security: 3, devotion: 1, freedom: 1 } },
-      { text: "其实松了一口气，自己也需要空间", scores: { passion: 0, security: 1, freedom: 3, devotion: 0 } }
-    ]
-  },
-  {
-    q: "你觉得恋爱中最重要的是什么？",
-    options: [
-      { text: "心动的感觉，那种怦然心跳永远不能消失", scores: { passion: 3, security: 0, devotion: 1, freedom: 1 } },
-      { text: "稳定和安全感，知道对方一直在", scores: { passion: 0, security: 3, devotion: 2, freedom: 0 } },
-      { text: "彼此成长，一起变成更好的人", scores: { passion: 1, security: 1, freedom: 2, devotion: 2 } },
-      { text: "自由和信任，不需要时刻黏在一起", scores: { passion: 0, security: 1, freedom: 3, devotion: 0 } }
-    ]
-  },
-  {
-    q: "恋人心情不好但不想说原因，你会？",
-    options: [
-      { text: "想尽办法逗对方开心，讲笑话做鬼脸", scores: { passion: 2, security: 0, devotion: 3, freedom: 0 } },
-      { text: "静静陪在旁边，不问但让对方知道你在", scores: { passion: 0, security: 3, devotion: 2, freedom: 1 } },
-      { text: "给对方空间，告诉ta想聊的时候随时来找你", scores: { passion: 0, security: 1, freedom: 3, devotion: 1 } },
-      { text: "会有点着急，忍不住追问到底怎么了", scores: { passion: 3, security: 0, devotion: 2, freedom: 0 } }
-    ]
-  },
-  {
-    q: "朋友说你在恋爱中变了个人，你觉得ta说的是？",
-    options: [
-      { text: "变得更温柔、更愿意付出了", scores: { passion: 1, security: 1, devotion: 3, freedom: 0 } },
-      { text: "变得更有安全感、更平和了", scores: { passion: 0, security: 3, devotion: 1, freedom: 1 } },
-      { text: "没什么变化，恋爱不应该改变自己", scores: { passion: 0, security: 1, freedom: 3, devotion: 0 } },
-      { text: "变得更勇敢、更敢于表达了", scores: { passion: 3, security: 0, devotion: 1, freedom: 1 } }
-    ]
-  },
-  {
-    q: "你怎么看待恋人翻看你的手机？",
-    options: [
-      { text: "随便看，我没什么好藏的", scores: { passion: 1, security: 2, devotion: 2, freedom: 0 } },
-      { text: "不太舒服，觉得每个人都需要隐私", scores: { passion: 0, security: 0, freedom: 3, devotion: 0 } },
-      { text: "可以看，但希望是在我同意的情况下", scores: { passion: 0, security: 3, freedom: 1, devotion: 1 } },
-      { text: "如果ta想看说明ta在意我，有点开心", scores: { passion: 2, security: 0, devotion: 2, freedom: 0 } }
-    ]
-  },
-  {
-    q: "如果注定要经历一段异地恋，你会怎么面对？",
-    options: [
-      { text: "每天打很长的电话，用文字填满距离", scores: { passion: 2, security: 0, devotion: 3, freedom: 0 } },
-      { text: "制定好联络计划，有规律地维系感情", scores: { passion: 0, security: 3, devotion: 1, freedom: 1 } },
-      { text: "享受各自的生活，见面时加倍珍惜", scores: { passion: 1, security: 1, freedom: 3, devotion: 1 } },
-      { text: "其实很害怕，距离对我来说太难了", scores: { passion: 3, security: 1, devotion: 2, freedom: 0 } }
-    ]
-  },
-  {
-    q: "恋爱一周年，你希望怎么度过？",
-    options: [
-      { text: "策划一个超级浪漫的惊喜，让这天终生难忘", scores: { passion: 3, security: 0, devotion: 2, freedom: 0 } },
-      { text: "去两个人第一次约会的地方，重温旧时光", scores: { passion: 1, security: 3, devotion: 2, freedom: 0 } },
-      { text: "来一场说走就走的旅行", scores: { passion: 2, security: 0, freedom: 3, devotion: 1 } },
-      { text: "做一顿好吃的，在家里安静地庆祝", scores: { passion: 0, security: 2, devotion: 2, freedom: 1 } }
-    ]
-  }
+const PW='love2025';
+function unlock(){const v=document.getElementById('pw').value.trim();if(v===PW){sw(0,1)}else{document.getElementById('pe').classList.add('on');const f=document.querySelector('.lk-f');f.classList.add('shake');setTimeout(()=>f.classList.remove('shake'),350)}}
+document.addEventListener('DOMContentLoaded',()=>{document.getElementById('pw').addEventListener('keyup',e=>{if(e.key==='Enter')unlock()})});
+function sw(a,b){document.getElementById('p'+a).classList.remove('on');document.getElementById('p'+b).classList.add('on')}
+const Q=[
+{q:"周末午后，恋人突然说「现在就想见你」，你的反应是？",o:[{t:"立刻出门！见面比什么都重要",s:{pa:3,de:2,ro:1}},{t:"开心答应，安排好手头的事再出发",s:{se:2,fr:1,de:1}},{t:"觉得这种突如其来的惊喜超级浪漫",s:{ro:3,pa:2}},{t:"有点犹豫，毕竟已经有自己的安排",s:{fr:3,se:1}}]},
+{q:"和恋人吵架后，你通常会怎么做？",o:[{t:"主动道歉，一秒都不想冷战",s:{de:3,pa:2}},{t:"先冷静一下，想清楚再好好沟通",s:{se:3,fr:1}},{t:"写一段很长的话表达自己的感受",s:{ro:2,de:2,pa:1}},{t:"等对方来找自己，不想先低头",s:{fr:3,pa:1}}]},
+{q:"你理想中的约会方式是？",o:[{t:"精心策划的烛光晚餐或浪漫惊喜",s:{ro:3,pa:2}},{t:"在家一起做饭看电影，安安静静",s:{se:3,de:1}},{t:"去没去过的地方探险旅行",s:{fr:3,pa:1,ro:1}},{t:"各自做喜欢的事，偶尔相视一笑",s:{fr:2,se:2}}]},
+{q:"发现恋人和异性朋友单独吃饭，你的第一反应？",o:[{t:"内心翻涌，会直接问清楚怎么回事",s:{pa:3,de:2}},{t:"虽然在意，但先观察再说",s:{se:3,fr:1}},{t:"完全不介意，相信对方也相信关系",s:{fr:3,se:1}},{t:"有点不安，希望对方主动跟我说",s:{de:3,ro:1}}]},
+{q:"如果给恋人准备一份特别的礼物，你会选？",o:[{t:"亲手写的信或做的手工，独一无二",s:{de:3,ro:2}},{t:"对方提过想要但舍不得买的东西",s:{se:2,de:2}},{t:"一场两个人的旅行，创造新回忆",s:{fr:3,ro:1,pa:1}},{t:"策划浪漫惊喜派对，让对方感动到哭",s:{ro:3,pa:2}}]},
+{q:"恋人说「我觉得我们需要各自的空间」，你会？",o:[{t:"有点慌，担心感情出了问题",s:{de:3,pa:2}},{t:"理解并尊重，这是健康关系的一部分",s:{fr:3,se:1}},{t:"同意，但希望约定联络频率",s:{se:3,de:1}},{t:"松了口气，自己其实也需要空间",s:{fr:3}}]},
+{q:"你觉得恋爱中最重要的是什么？",o:[{t:"心动的感觉永远不能消失",s:{pa:3,ro:2}},{t:"稳定和安全感，知道对方一直在",s:{se:3,de:1}},{t:"彼此成长，一起变成更好的人",s:{fr:2,de:2,se:1}},{t:"浪漫和仪式感，让每天都有甜蜜记忆",s:{ro:3,pa:1,de:1}}]},
+{q:"恋人心情不好但不想说原因，你会？",o:[{t:"想尽办法逗对方开心",s:{de:3,pa:1}},{t:"安静陪在旁边，不问但让对方知道你在",s:{se:3,de:2}},{t:"给空间，告诉ta想聊时随时找你",s:{fr:3,se:1}},{t:"有点着急，忍不住追问到底怎么了",s:{pa:3,de:1}}]},
+{q:"朋友说你恋爱后变了个人，你觉得ta说的是？",o:[{t:"变得更温柔、更愿意付出了",s:{de:3,ro:1}},{t:"变得更有安全感、更平和了",s:{se:3}},{t:"没什么变化，恋爱不应该改变自己",s:{fr:3}},{t:"变得更勇敢、更敢于表达了",s:{pa:3,ro:1}}]},
+{q:"你怎么看待恋人翻看你的手机？",o:[{t:"随便看，我没什么好藏的",s:{de:2,se:1}},{t:"不太舒服，每个人都需要隐私",s:{fr:3}},{t:"可以看，但希望在我同意的情况下",s:{se:3,fr:1}},{t:"如果ta想看说明ta在意我，有点开心",s:{pa:2,ro:2,de:1}}]},
+{q:"注定要经历一段异地恋，你会怎么面对？",o:[{t:"每天打很长的电话，用文字填满距离",s:{de:3,pa:1,ro:1}},{t:"制定联络计划，有规律地维系感情",s:{se:3}},{t:"享受各自的生活，见面时加倍珍惜",s:{fr:3,se:1}},{t:"很害怕，距离对我来说太难了",s:{pa:3,de:2}}]},
+{q:"恋爱一周年，你希望怎么度过？",o:[{t:"策划超级浪漫的惊喜，终生难忘",s:{ro:3,pa:2}},{t:"去第一次约会的地方，重温旧时光",s:{se:2,ro:2,de:1}},{t:"来一场说走就走的旅行",s:{fr:3,pa:1,ro:1}},{t:"做一顿好吃的，在家安静庆祝",s:{se:2,de:2}}]},
+{q:"你更容易被什么样的人吸引？",o:[{t:"有强烈个人魅力、自信耀眼的人",s:{pa:3,ro:1}},{t:"温柔体贴、让人安心的人",s:{se:2,de:2}},{t:"有趣独立、不黏人的人",s:{fr:3,pa:1}},{t:"浪漫细腻、懂得制造惊喜的人",s:{ro:3,de:1}}]},
+{q:"如果恋人忘记了你们的纪念日，你会？",o:[{t:"很难过，觉得自己不被重视",s:{ro:3,de:2}},{t:"有点失落但理解，谁都会忘事",s:{se:3}},{t:"无所谓，日子又不是靠纪念日维持的",s:{fr:3}},{t:"直接提醒ta，然后要求补偿",s:{pa:3,ro:1}}]},
+{q:"你在感情中最害怕什么？",o:[{t:"激情消退，两个人变得像室友",s:{pa:3,ro:2}},{t:"不确定感，不知道对方真正的想法",s:{se:3,de:1}},{t:"失去自我，完全围着对方转",s:{fr:3}},{t:"付出太多却得不到同等回报",s:{de:2,pa:2,ro:1}}]},
+{q:"你觉得说「我爱你」应该？",o:[{t:"想说就说，爱要大声讲出来",s:{pa:3,ro:1}},{t:"在特别的时刻认真地说",s:{ro:3,se:1}},{t:"不需要常说，行动比语言重要",s:{se:2,de:2}},{t:"很少主动说，但心里一直在意",s:{fr:2,de:2}}]},
+{q:"和恋人意见不合时，你倾向于？",o:[{t:"据理力争，把道理讲清楚",s:{pa:3,fr:1}},{t:"妥协退让，不想伤害关系",s:{de:3,se:1}},{t:"各退一步，找到折中方案",s:{se:3,fr:1}},{t:"先转移话题，之后找温馨的方式解决",s:{ro:2,se:1,de:1}}]},
+{q:"如果用一句话形容你理想的爱情？",o:[{t:"轰轰烈烈，像电影一样刻骨铭心",s:{pa:3,ro:2}},{t:"细水长流，平淡中有最真实的幸福",s:{se:3,de:2}},{t:"两个完整的人，相互欣赏并肩前行",s:{fr:3,se:1}},{t:"每天都有小浪漫，甜蜜到老",s:{ro:3,de:2}}]}
 ];
-
-// ===== 人格类型 =====
-const types = {
-  "passion-devotion": {
-    icon: "🔥",
-    name: "炽热守护者",
-    en: "The Passionate Guardian",
-    desc: "你在爱情中燃烧着最热烈的火焰。当你爱上一个人，你会全身心地投入，用尽所有的温柔和热情。你相信爱就要大声说出来，相信每一天都应该像初恋一样心动。你是那种会为了爱人学做一道菜、写一封长信、策划一个惊喜的人。",
-    tags: ["热烈", "全心投入", "浪漫至上", "感性"],
-    best: "温暖陪伴者",
-    bestDesc: "你需要一个能接住你所有热情的人。温暖陪伴者会给你稳定的回应和安全感，让你的热烈有处安放，不再害怕付出太多。"
-  },
-  "passion-freedom": {
-    icon: "🦋",
-    name: "浪漫冒险家",
-    en: "The Romantic Adventurer",
-    desc: "你是爱情里的一阵风，自由、热烈、充满惊喜。你渴望那种电光火石的心动感，同时又珍惜自我的空间和独立。对你来说，最好的恋爱是两个发光的人相互吸引，而不是两个人变成一个人。你的爱情里永远有新鲜感。",
-    tags: ["自由灵魂", "充满惊喜", "独立", "不被定义"],
-    best: "炽热守护者",
-    bestDesc: "你需要一个同样热烈但更愿意为你停留的人。炽热守护者的深情能让你感受到被珍视，而不是被束缚。"
-  },
-  "security-devotion": {
-    icon: "🌿",
-    name: "温暖陪伴者",
-    en: "The Warm Companion",
-    desc: "你是爱情中最温暖的存在。你不需要轰轰烈烈的浪漫，而是在乎每一个平凡日子里的相伴。你记得恋人的每一个小习惯，你用润物细无声的方式表达爱意。在你眼中，真正的爱情不是烟花般短暂绚烂，而是细水长流的陪伴。",
-    tags: ["温暖", "细腻", "长情", "安全感"],
-    best: "炽热守护者",
-    bestDesc: "炽热守护者的热情能点燃你平静生活中的浪漫火花，而你的稳定和包容恰好是ta最需要的港湾。"
-  },
-  "security-freedom": {
-    icon: "🌊",
-    name: "理性共鸣者",
-    en: "The Rational Resonator",
-    desc: "你是恋爱中最成熟清醒的类型。你相信好的爱情需要两个独立而完整的人，彼此信任但不过度依赖。你不会因为恋爱而失去自我，也尊重对方的个人空间。你的爱含蓄而深沉，不常说甜言蜜语，但每句话都是认真的。",
-    tags: ["独立", "清醒", "理性", "深沉"],
-    best: "浪漫冒险家",
-    bestDesc: "浪漫冒险家能给你的生活带来新鲜感和心动的瞬间，而你的理性和稳重恰好能为ta的冒险提供一个安心的港湾。"
-  },
-  "devotion-freedom": {
-    icon: "🌙",
-    name: "温柔理想家",
-    en: "The Gentle Idealist",
-    desc: "你对爱情有着最美的想象。你渴望深刻的灵魂连接，但同时也珍惜个人的内在世界。你是那种会默默为恋人做很多事、但也需要独处时间来恢复能量的人。你的爱像月光，不耀眼但持久而温柔。",
-    tags: ["理想主义", "温柔", "内敛", "灵魂伴侣"],
-    best: "温暖陪伴者",
-    bestDesc: "温暖陪伴者的细腻和耐心能理解你的内在世界，而你的深情和理想主义恰好能让平淡的日子充满意义。"
-  },
-  "passion-security": {
-    icon: "🌸",
-    name: "深情眷恋者",
-    en: "The Devoted Romantic",
-    desc: "你把安全感和浪漫完美融合在一起。你渴望一份既有心跳加速又有岁月静好的爱情。你会为恋人创造浪漫，也会为未来做好规划。对你来说，理想的爱情是：既能在雨天一起淋雨，也能在晴天一起晒被子。",
-    tags: ["深情", "浪漫", "踏实", "安全感"],
-    best: "温柔理想家",
-    bestDesc: "温柔理想家的深度和灵性能满足你对灵魂伴侣的渴望，而你的踏实和深情能给ta最需要的安全感和归属感。"
-  }
-};
-
-// ===== 逻辑 =====
-let currentQ = 0;
-let scores = { passion: 0, security: 0, freedom: 0, devotion: 0 };
-
-function startTest() {
-  document.getElementById('startPage').classList.remove('active');
-  document.getElementById('testPage').classList.add('active');
-  currentQ = 0;
-  scores = { passion: 0, security: 0, freedom: 0, devotion: 0 };
-  showQuestion();
-}
-
-function showQuestion() {
-  const q = questions[currentQ];
-  document.getElementById('progressFill').style.width = ((currentQ) / questions.length * 100) + '%';
-  document.getElementById('questionCounter').textContent = `第 ${currentQ + 1} / ${questions.length} 题`;
-  document.getElementById('questionText').textContent = q.q;
-
-  const container = document.getElementById('optionsContainer');
-  container.innerHTML = '';
-  q.options.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'option-btn';
-    btn.textContent = opt.text;
-    btn.onclick = () => selectOption(i);
-    container.appendChild(btn);
-  });
-}
-
-function selectOption(idx) {
-  const opts = questions[currentQ].options[idx].scores;
-  for (let key in opts) {
-    scores[key] += opts[key];
-  }
-
-  // 选中动画
-  const btns = document.querySelectorAll('.option-btn');
-  btns[idx].classList.add('selected');
-  btns.forEach(b => b.style.pointerEvents = 'none');
-
-  setTimeout(() => {
-    currentQ++;
-    if (currentQ < questions.length) {
-      document.getElementById('testPage').classList.remove('active');
-      setTimeout(() => {
-        document.getElementById('testPage').classList.add('active');
-        showQuestion();
-      }, 50);
-    } else {
-      showResult();
-    }
-  }, 400);
-}
-
-function getType() {
-  // 取最高的两个维度组合
-  const sorted = Object.entries(scores).sort((a, b) => b[1] - a[1]);
-  const top2 = [sorted[0][0], sorted[1][0]].sort().join('-');
-
-  // 映射到已有类型
-  const typeMap = {
-    'devotion-passion': 'passion-devotion',
-    'freedom-passion': 'passion-freedom',
-    'devotion-security': 'security-devotion',
-    'freedom-security': 'security-freedom',
-    'devotion-freedom': 'devotion-freedom',
-    'passion-security': 'passion-security'
-  };
-
-  return types[top2] || types[typeMap[top2]] || types['passion-devotion'];
-}
-
-function showResult() {
-  document.getElementById('testPage').classList.remove('active');
-  document.getElementById('resultPage').classList.add('active');
-
-  const type = getType();
-  document.getElementById('resultIcon').textContent = type.icon;
-  document.getElementById('resultName').textContent = type.name;
-  document.getElementById('resultEn').textContent = type.en;
-  document.getElementById('resultDesc').textContent = type.desc;
-
-  // Tags
-  const tagsEl = document.getElementById('resultTags');
-  tagsEl.innerHTML = type.tags.map(t => `<span class="result-tag">#${t}</span>`).join('');
-
-  // Dimensions
-  const maxScore = Math.max(...Object.values(scores));
-  const dimEl = document.getElementById('resultDimensions');
-  const dimLabels = { passion: '热情指数', security: '安全感', freedom: '自由度', devotion: '奉献度' };
-  dimEl.innerHTML = Object.entries(scores).map(([key, val]) => `
-    <div class="dimension">
-      <div class="dimension-header">
-        <span class="dimension-label">${dimLabels[key]}</span>
-        <span class="dimension-value">${Math.round(val / maxScore * 100)}%</span>
-      </div>
-      <div class="dimension-bar">
-        <div class="dimension-fill" style="width: 0%;" data-width="${val / maxScore * 100}%"></div>
-      </div>
-    </div>
-  `).join('');
-
-  // 动画：维度条
-  setTimeout(() => {
-    document.querySelectorAll('.dimension-fill').forEach(el => {
-      el.style.width = el.dataset.width;
-    });
-  }, 200);
-
-  // 匹配
-  document.getElementById('matchTitle').textContent = `💕 最佳匹配：${type.best}`;
-  document.getElementById('matchDesc').textContent = type.bestDesc;
-}
-
-function retry() {
-  document.getElementById('resultPage').classList.remove('active');
-  document.getElementById('startPage').classList.add('active');
-}
-
-function shareResult() {
-  // 尝试使用 Web Share API
-  if (navigator.share) {
-    navigator.share({
-      title: '恋爱人格测试',
-      text: `我的恋爱人格是「${document.getElementById('resultName').textContent}」${document.getElementById('resultIcon').textContent}！来测测你的恋爱人格吧～`,
-      url: window.location.href
-    }).catch(() => {});
-  } else {
-    // 复制链接
-    const text = `我的恋爱人格是「${document.getElementById('resultName').textContent}」${document.getElementById('resultIcon').textContent}！来测测你的恋爱人格吧～\n${window.location.href}`;
-    navigator.clipboard.writeText(text).then(() => {
-      const btn = document.querySelector('.btn-share');
-      btn.textContent = '已复制 ✓';
-      setTimeout(() => btn.textContent = '分享结果', 2000);
-    }).catch(() => {
-      alert('长按截图分享给好友吧～');
-    });
-  }
-}
+const T={"烈焰玫瑰":{e:"🌹",en:"Flame Rose",d:"你的爱情像一团不灭的火焰。你天生热烈、勇敢、敢爱敢恨，在感情中从不掩饰自己的情感。当你爱上一个人，全世界都能感受到你眼中的光芒。你追求令人心跳加速的恋爱体验，相信真正的爱情应该是轰轰烈烈的。",tg:["热烈","勇敢","敢爱敢恨","电光火石"],m:"月光薄荷",md:"月光薄荷的温柔与内敛恰好能承接你的炽热，而你的热情能让ta走出内心世界，一起创造深刻又持久的爱情。",w:"你的热情有时会给对方造成压力。学会在表达爱意时留一些呼吸的空间，让火焰稳定燃烧而不是瞬间燃尽。",n:{pa:8,ro:5,de:4,se:2,fr:1}},"月光薄荷":{e:"🌿",en:"Moonlit Mint",d:"你的爱情像月光一样，不耀眼但持久而温柔。你有丰富的内心世界，渴望灵魂层面的连接，但同时也需要独处时间来恢复能量。你是那种会默默为恋人做很多事、却不善于表达的人。你的爱含蓄而深沉。",tg:["内敛","深情","灵魂伴侣","细腻"],m:"烈焰玫瑰",md:"烈焰玫瑰的热情能照亮你内心深处的温柔，而你的深度和细腻恰好能让ta感受到被真正理解的幸福。",w:"你容易把感受藏在心里，导致对方猜不透你的想法。试着更主动地表达情感，沉默有时不是保护而是伤害。",n:{de:6,fr:6,ro:4,se:3,pa:2}},"蜜糖城堡":{e:"🏰",en:"Honey Castle",d:"你是恋爱中最温暖的守护者。你把安全感看得比什么都重要，爱情像一座精心建造的城堡——坚固、温暖、充满安全感。你记得恋人的每一个小习惯，用润物细无声的方式表达爱意。真正的爱不需要惊天动地。",tg:["安全感","温暖","踏实","守护者"],m:"星空漫游者",md:"星空漫游者的活力和冒险精神能给你的生活带来新鲜感，而你的温暖与稳定恰好是ta最需要的港湾。",w:"过度追求稳定可能让关系缺少惊喜和激情。偶尔打破常规，给自己和恋人一些意想不到的小浪漫。",n:{se:8,de:5,ro:3,pa:2,fr:2}},"星空漫游者":{e:"🌌",en:"Starry Wanderer",d:"你是爱情里最自由的灵魂。你相信好的爱情应该是两个完整的人相互吸引，而不是两个人变成一个人。你珍惜个人空间，欣赏独立的伴侣，在感情中保持清醒和理性。你的爱不张扬，却有着让人安心的分寸感。",tg:["自由","独立","清醒","分寸感"],m:"蜜糖城堡",md:"蜜糖城堡的温暖能让你感受到被接纳和理解，而你的独立和理性恰好能帮ta建立更健康的关系边界。",w:"有时候你的独立会被误解为冷漠。在保持自我的同时，也别忘了适时表达你的在乎，让对方知道你是爱着的。",n:{fr:8,se:4,pa:3,de:2,ro:2}},"草莓甜心":{e:"🍓",en:"Strawberry Sweetheart",d:"你是恋爱中的浪漫主义者，相信每一天都可以充满甜蜜。你注重仪式感，从纪念日到小日常，你都想把它们过成童话。你有一颗柔软的心，容易被感动，也善于制造感动。爱情最美的样子就是永远甜甜的。",tg:["浪漫","仪式感","少女心","甜蜜"],m:"暖阳骑士",md:"暖阳骑士的行动力和奉献精神能把你的浪漫幻想变成现实，而你的甜蜜和仪式感让ta感到被珍视。",w:"过分追求浪漫可能忽略关系中真实的问题。记住，真正的爱情不只有甜蜜，能一起面对困难才是最浪漫的事。",n:{ro:8,pa:4,de:4,se:2,fr:1}},"暖阳骑士":{e:"☀️",en:"Sunny Knight",d:"你是恋爱中的守护天使，把奉献和付出当成最自然的事。你总是把恋人的需求放在自己前面，愿意为爱付出一切。你的爱像阳光一样温暖而无私，总是默默为对方做好一切。看到爱的人幸福就是最大的满足。",tg:["无私","付出","温暖","守护天使"],m:"草莓甜心",md:"草莓甜心的浪漫和表达能力能让你感受到被回应的幸福，而你的奉献精神恰好能满足ta对爱情的美好期待。",w:"过度付出容易迷失自我。学会也接受对方的爱，恋爱是双向的——你值得被同样好地对待。",n:{de:8,se:4,ro:3,pa:3,fr:1}},"极光猎人":{e:"🌠",en:"Aurora Hunter",d:"你渴望既有激情又有自由的爱情，就像追逐极光一样——既要惊心动魄的美，也要不被束缚的灵魂。你热爱冒险和新鲜感，在感情中充满活力和创造力。最好的爱情是两个人一起去探索世界。",tg:["冒险","新鲜感","活力","探索者"],m:"深海灯塔",md:"深海灯塔的深沉和稳定能给你一个温暖的归处，而你的活力和冒险精神能点亮ta平静生活中的色彩。",w:"对新鲜感的过度追求可能让你难以沉淀。试着在日常中也发现美好，有时最深的心动藏在最平凡的瞬间。",n:{pa:6,fr:6,ro:4,de:2,se:1}},"深海灯塔":{e:"🗼",en:"Deep Sea Lighthouse",d:"你的爱情沉稳而有力量，像深海中的灯塔一样，安静但永远在那里。你不轻易恋爱，但一旦确定了就会全力以赴。你理性但深情，不善于甜言蜜语，但你的每一个行动都在默默说着「我在」。",tg:["沉稳","可靠","深情","力量感"],m:"极光猎人",md:"极光猎人的热情和活力能让你僵硬的外壳逐渐融化，而你的沉稳和可靠恰好是ta漂泊灵魂最需要的锚点。",w:"你的沉默寡言有时让恋人缺乏安全感。偶尔说出心里话，一句简单的「我爱你」比做一百件事更有力量。",n:{se:6,de:5,pa:4,fr:3,ro:2}},"棉花糖云朵":{e:"☁️",en:"Cotton Cloud",d:"你是恋爱中最甜蜜的存在，温柔、浪漫、充满爱意。你喜欢被宠爱的感觉，也擅长用甜蜜的方式回馈对方。你的爱情像棉花糖一样柔软甜蜜，最好的关系就是两个人永远腻在一起、永远有说不完的话。",tg:["甜蜜","黏人","温柔","小甜心"],m:"星空漫游者",md:"虽然看似矛盾，但星空漫游者的独立恰好能给你们的关系带来健康的张力，而你的温柔能融化ta的理性外壳。",w:"过于依赖恋人会让你在关系中失去自我。试着发展自己的兴趣和社交圈，有自己的光芒才能更好地爱人。",n:{de:6,ro:6,pa:4,se:3,fr:0}},"野玫瑰":{e:"🥀",en:"Wild Rose",d:"你的爱情既有玫瑰的热烈，也有野花的不羁。你追求深刻而真实的关系，不屑于肤浅的恋爱。你敢爱敢恨，同时也保持着独立的姿态。你的爱情哲学是：我选择爱你，但我永远不会失去自己。",tg:["独立","深刻","敢爱敢恨","真实"],m:"蜜糖城堡",md:"蜜糖城堡的温暖和包容能接住你所有的锋芒，而你的真实和深刻能给ta的安稳生活注入灵魂的深度。",w:"你的强势和独立有时会让恋人感到被拒之门外。适时展露脆弱，让对方知道你也需要被爱、被依靠。",n:{pa:5,fr:5,de:4,ro:3,se:2}}};
+function calcType(sc){let best=null,bd=Infinity;const mx=Math.max(...Object.values(sc))||1;const nm={};for(let k in sc)nm[k]=sc[k]/mx*10;for(let name in T){const nd=T[name].n;let d=0;for(let k in nd)d+=Math.pow((nm[k]||0)-(nd[k]||0),2);d=Math.sqrt(d);if(d<bd){bd=d;best=name}}return best}
+let qi=0,sc={pa:0,se:0,fr:0,de:0,ro:0};
+function begin(){qi=0;sc={pa:0,se:0,fr:0,de:0,ro:0};sw(1,2);showQ()}
+function showQ(){const q=Q[qi];document.getElementById('bar').style.width=(qi/Q.length*100)+'%';document.getElementById('qn').textContent='第 '+(qi+1)+' 题';document.getElementById('qtt').textContent='共 '+Q.length+' 题';document.getElementById('qq').textContent=q.q;const c=document.getElementById('os');c.innerHTML='';q.o.forEach((o,i)=>{const b=document.createElement('button');b.className='oo';b.textContent=o.t;b.onclick=()=>pick(i);c.appendChild(b)})}
+function pick(i){const s=Q[qi].o[i].s;for(let k in s)sc[k]=(sc[k]||0)+s[k];const bs=document.querySelectorAll('.oo');bs[i].classList.add('pk');bs.forEach(b=>b.style.pointerEvents='none');setTimeout(()=>{qi++;if(qi<Q.length){sw(2,2);showQ()}else{showR()}},350)}
+function showR(){sw(2,3);const name=calcType(sc);const t=T[name];document.getElementById('Ie').textContent=t.e;document.getElementById('In').textContent=name;document.getElementById('Ien').textContent=t.en;document.getElementById('Id').textContent=t.d;document.getElementById('It').innerHTML=t.tg.map(x=>'<span>#'+x+'</span>').join('');const mx=Math.max(...Object.values(sc))||1;const lb={pa:'热情指数',se:'安全感',fr:'自由度',de:'奉献度',ro:'浪漫值'};const fc={pa:'f-pa',se:'f-se',fr:'f-fr',de:'f-de',ro:'f-ro'};document.getElementById('Idm').innerHTML=Object.entries(sc).map(([k,v])=>{const p=Math.round(v/mx*100);return '<div class="dim"><div class="dh"><span class="dl">'+lb[k]+'</span><span class="dv">'+p+'%</span></div><div class="dt"><div class="df '+fc[k]+'" style="width:0%" data-w="'+p+'%"></div></div></div>'}).join('');setTimeout(()=>{document.querySelectorAll('.df').forEach(e=>{e.style.width=e.dataset.w})},200);document.getElementById('Imt').textContent='💕 最佳匹配：'+t.m;document.getElementById('Imd').textContent=t.md;document.getElementById('Iwt').textContent='⚡ 恋爱警示';document.getElementById('Iwd').textContent=t.w}
+function again(){sw(3,1)}
+function shr(){const n=document.getElementById('In').textContent;const e=document.getElementById('Ie').textContent;const txt='我的恋爱人格是「'+n+'」'+e+'！来测测你的恋爱人格吧～';if(navigator.share){navigator.share({title:'恋爱人格测试',text:txt,url:location.href}).catch(()=>{})}else{navigator.clipboard.writeText(txt+'\n'+location.href).then(()=>{const b=document.getElementById('sbtn');b.textContent='已复制 ✓';setTimeout(()=>b.textContent='分享结果',2e3)}).catch(()=>alert('长按截图分享给好友吧～'))}}
 </script>
-
 </body>
 </html>
