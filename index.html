@@ -16,18 +16,6 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--txt)
 .pg{display:none}.pg.on{display:block;animation:fi .5s ease}
 @keyframes fi{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.shake{animation:shake .35s ease}
-.lk{text-align:center;padding-top:90px}
-.lk-e{font-size:52px;margin-bottom:20px;display:inline-block;animation:bob 2.5s ease-in-out infinite}
-.lk-t{font-family:'ZCOOL XiaoWei',serif;font-size:28px;margin-bottom:8px;letter-spacing:3px}
-.lk-s{font-size:14px;color:var(--txt-m);margin-bottom:32px;font-weight:300;line-height:1.7}
-.lk-f{max-width:260px;margin:0 auto 12px}
-.lk-i{width:100%;padding:14px 20px;border:2px solid var(--bdr);border-radius:50px;font-size:16px;text-align:center;background:var(--card);color:var(--txt);font-family:inherit;outline:none;transition:border .3s;letter-spacing:3px}
-.lk-i:focus{border-color:var(--pri)}.lk-i::placeholder{color:var(--txt-m);letter-spacing:1px;font-size:13px}
-.lk-err{font-size:12px;color:#E57373;height:18px;margin-bottom:16px;opacity:0;transition:opacity .3s}.lk-err.on{opacity:1}
-.btn{background:linear-gradient(135deg,var(--pri),var(--acc));color:#fff;border:none;padding:14px 56px;border-radius:50px;font-size:15px;font-weight:500;cursor:pointer;letter-spacing:2px;font-family:inherit;box-shadow:0 6px 20px rgba(242,136,155,.3);transition:all .3s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(242,136,155,.35)}.btn:active{transform:translateY(0)}
 .st{text-align:center;padding-top:50px}
 .st-badge{display:inline-block;background:var(--pri-l);color:var(--pri-d);font-size:12px;font-weight:500;padding:5px 16px;border-radius:50px;margin-bottom:20px}
 .st-e{font-size:72px;margin-bottom:16px;display:inline-block;animation:bob 3s ease-in-out infinite}
@@ -35,6 +23,8 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--txt)
 .st-sub{font-size:15px;color:var(--txt-l);line-height:1.8;margin-bottom:32px;font-weight:300}
 .st-nums{display:flex;justify-content:center;gap:28px;margin-bottom:40px}
 .st-n{text-align:center}.st-n b{font-family:'ZCOOL XiaoWei',serif;font-size:26px;color:var(--pri-d);display:block}.st-n span{font-size:12px;color:var(--txt-m);font-weight:300}
+.btn{background:linear-gradient(135deg,var(--pri),var(--acc));color:#fff;border:none;padding:14px 56px;border-radius:50px;font-size:15px;font-weight:500;cursor:pointer;letter-spacing:2px;font-family:inherit;box-shadow:0 6px 20px rgba(242,136,155,.3);transition:all .3s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 28px rgba(242,136,155,.35)}.btn:active{transform:translateY(0)}
 .btn-go{padding:16px 72px;font-size:17px;letter-spacing:3px;position:relative;overflow:hidden}
 .btn-go::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);transition:left .5s}
 .btn-go:hover::after{left:100%}
@@ -80,15 +70,11 @@ body{font-family:'Noto Sans SC',sans-serif;background:var(--bg);color:var(--txt)
 <body>
 <div class="orb o1"></div><div class="orb o2"></div>
 <div class="wrap">
-<div id="p0" class="pg lk on"><div class="lk-e">🔐</div><h1 class="lk-t">恋爱人格测试</h1><p class="lk-s">本测试为付费内容<br>请输入购买后获得的专属密码</p><div class="lk-f"><input type="text" class="lk-i" id="pw" placeholder="请输入密码" autocomplete="off" maxlength="20"></div><div class="lk-err" id="pe">密码不正确，请重新输入</div><button class="btn" onclick="unlock()">解锁测试</button></div>
-<div id="p1" class="pg st"><div class="st-badge">🧪 恋爱心理测试</div><div class="st-e">💘</div><h1 class="st-t">恋爱人格诊断</h1><p class="st-sub">18道恋爱情境题<br>发现你在爱情中的真实人格</p><div class="st-nums"><div class="st-n"><b>18</b><span>道情境题</span></div><div class="st-n"><b>10</b><span>种人格</span></div><div class="st-n"><b>5</b><span>大维度</span></div></div><button class="btn btn-go" onclick="begin()">开始测试</button></div>
+<div id="p1" class="pg st on"><div class="st-badge">🧪 恋爱心理测试</div><div class="st-e">💘</div><h1 class="st-t">恋爱人格诊断</h1><p class="st-sub">18道恋爱情境题<br>发现你在爱情中的真实人格</p><div class="st-nums"><div class="st-n"><b>18</b><span>道情境题</span></div><div class="st-n"><b>10</b><span>种人格</span></div><div class="st-n"><b>5</b><span>大维度</span></div></div><button class="btn btn-go" onclick="begin()">开始测试</button></div>
 <div id="p2" class="pg"><div class="th"><div class="pt"><div class="pb" id="bar"></div></div><div class="tm"><span class="qn" id="qn"></span><span class="qt" id="qtt"></span></div></div><div class="qq" id="qq"></div><div class="os" id="os"></div></div>
 <div id="p3" class="pg rp"><div class="rc"><div class="re" id="Ie"></div><div class="rb">你的恋爱人格</div><div class="rn" id="In"></div><div class="rn2" id="Ien"></div><div class="rd" id="Id"></div><div class="rtg" id="It"></div><div class="dims" id="Idm"></div><div class="rm"><h4 id="Imt"></h4><p id="Imd"></p></div><div class="rw"><h4 id="Iwt"></h4><p id="Iwd"></p></div></div><div class="br"><button class="ba" onclick="again()">重新测试</button><button class="bs" id="sbtn" onclick="shr()">分享结果</button></div><p class="ft">长按截图分享给好友一起测试吧 🌸</p></div>
 </div>
 <script>
-const PW='love2025';
-function unlock(){const v=document.getElementById('pw').value.trim();if(v===PW){sw(0,1)}else{document.getElementById('pe').classList.add('on');const f=document.querySelector('.lk-f');f.classList.add('shake');setTimeout(()=>f.classList.remove('shake'),350)}}
-document.addEventListener('DOMContentLoaded',()=>{document.getElementById('pw').addEventListener('keyup',e=>{if(e.key==='Enter')unlock()})});
 function sw(a,b){document.getElementById('p'+a).classList.remove('on');document.getElementById('p'+b).classList.add('on')}
 const Q=[
 {q:"周末午后，恋人突然说「现在就想见你」，你的反应是？",o:[{t:"立刻出门！见面比什么都重要",s:{pa:3,de:2,ro:1}},{t:"开心答应，安排好手头的事再出发",s:{se:2,fr:1,de:1}},{t:"觉得这种突如其来的惊喜超级浪漫",s:{ro:3,pa:2}},{t:"有点犹豫，毕竟已经有自己的安排",s:{fr:3,se:1}}]},
